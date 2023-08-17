@@ -1,21 +1,14 @@
-fn unique(a: Vec<i32>) -> Vec<i32> {
-    todo!();
+fn unique<TIterator, TItem: PartialEq>(a: TIterator) -> Vec<TItem>
+where TIterator: PartialEq + IntoIterator<Item = TItem>
+{
+    let mut result: Vec<TItem> = Vec::new();
+    for item in a {
+        if !result.contains(&item) {
+            result.push(item);
+        }
+    }
+    result
 }
-
-// advanced 1: use generic types
-// fn unique(a: Vec<T>) -> Vec<T> {
-//     todo!();
-// }
-
-// advanced 2: keep items in order
-// fn unique(a: Iterable<T>) -> Vec<T> {
-//     todo!();
-// }
-
-// advanced 3: use iterators
-// fn unique(a: Iterable<T>) -> Vec<T> {
-//     todo!();
-// }
 
 fn main() {
     let input = vec![2, 1, 1];
@@ -26,8 +19,8 @@ fn main() {
 
 #[test]
 fn empty_list() {
-    let input = vec![];
-    let expected_output = vec![];
+    let input:Vec<u8> = Vec::new();
+    let expected_output:Vec<u8> = Vec::new();
     let actual_output = unique(input);
     assert_eq!(actual_output, expected_output);
 }
@@ -43,7 +36,7 @@ fn sorted_list() {
 #[test]
 fn unsorted_list() {
     let input = vec![1, 5, 2];
-    let expected_output = vec![1, 2, 5];
+    let expected_output = vec![1, 5, 2];
     let actual_output = unique(input);
     assert_eq!(actual_output, expected_output);
 }
@@ -52,7 +45,7 @@ fn unsorted_list() {
 #[test]
 fn unsorted_list_with_duplicates() {
     let input = vec![1, 5, 2, 2, 1];
-    let expected_output = vec![1, 2, 5];
+    let expected_output = vec![1, 5, 2];
     let actual_output = unique(input);
     assert_eq!(actual_output, expected_output);
 }
