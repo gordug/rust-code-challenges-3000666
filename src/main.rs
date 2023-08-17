@@ -1,5 +1,7 @@
-fn info(a: &T) {
-    todo!();
+use std::fmt::Debug;
+
+fn info(t: impl Debug) {
+    println!("{:?}", t);
 }
 
 fn main() {
@@ -33,22 +35,22 @@ fn string() {
     info(&input);
 }
 
-// #[test]
-// fn chars() {
-//     let input = 'r';
-//     info(&input);
-// }
+#[test]
+fn chars() {
+    let input = 'r';
+    info(&input);
+}
 
-// #[test]
-// fn cstring() {
-//     use std::ffi::{CString};
-//     let input = CString::new("Rust").unwrap();
-//     info(&input);
-// }
+#[test]
+fn cstring() {
+    use std::ffi::{CString};
+    let input = CString::new("Rust").unwrap();
+    info(&input);
+}
 
-// #[test]
-// fn path() {
-//     use std::path::Path;
-//     let input = Path::new("/tmp/rust");
-//     info(input);
-// }
+#[test]
+fn path() {
+    use std::path::Path;
+    let input = Path::new("/tmp/rust");
+    info(&input);
+}
