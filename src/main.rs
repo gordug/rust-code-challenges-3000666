@@ -1,5 +1,23 @@
 fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+    if a.len() == 0 {
+        return None;
+    }
+
+    let mut sorted = a.clone();
+    sorted.sort_by(|a, b| {
+        let compare_result = a.partial_cmp(b);
+        match compare_result {
+            Some(ordering) => ordering,
+            None => std::cmp::Ordering::Equal,
+        }
+    });
+
+    let mid = sorted.len() / 2;
+    if sorted.len() % 2 == 0 {
+        Some((sorted[mid - 1] + sorted[mid]) / 2.0)
+    } else {
+        Some(sorted[mid])
+    }
 }
 
 fn main() {
