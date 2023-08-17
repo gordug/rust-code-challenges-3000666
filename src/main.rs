@@ -35,7 +35,10 @@ impl Hand {
         for card in self.cards.iter() {
             match card {
                 Card::Ace if value > 10 => value += 1,
-                Card::Ace if high_aces > 0 && value > 10 => value -= 10,
+                Card::Ace if high_aces > 0 && value > 10 => {
+                    value -= 10;
+                    high_aces -= 1;
+                },
                 Card::Ace => {
                     value += 11;
                     high_aces += 1;
