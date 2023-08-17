@@ -1,5 +1,10 @@
 fn sum_with_missing(numbers: Vec<Option<i32>>) -> i32 {
-    todo!();
+    numbers.iter().fold(0, |acc, &option| acc +
+        // I could use `unwrap_or` here, but I want to show the `match` syntax
+        match option {
+            Some(num) => num,
+            None => 0,
+        })
 }
 
 fn main() {
